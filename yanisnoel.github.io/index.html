@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/galerie.css">
 <script>window.goatcounter={path:function(p){try{var c=new URLSearchParams(location.search).get('c')||sessionStorage.getItem('camp')||'';c=c.toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,40);return location.pathname+(c?'?c='+c:'')}catch(e){return p}}};</script>
 <script data-goatcounter="https://yanisnoel.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -211,30 +212,37 @@
           <h3><span class="fr">Assistant conducteur de travaux - « Les Maritimes »</span><span class="en">Assistant site manager - “Les Maritimes”</span></h3>
           <p><span class="fr">75 logements, 5 bâtiments R+3, lots gros œuvre + VRD (≈ 6 800 m² de plancher, 3 700 m³ de béton). <br> Service achats (DPGF, tableaux comparatifs d'offres, négociation) <br> Préparation d'un démarrage de chantier retardé de 3 mois, commandes, et conception des réseaux sous dallage (choix techniques, DAO, suivi sur site).</span><span class="en">75 dwellings, 5 four-storey buildings, structural + external works lots (≈ 6,800 m² floor area, 3,700 m³ concrete). <br> Procurement (bills of quantities, bid comparisons, negotiation) <br> Preparing a start-up delayed by 3 months, ordering, and design of under-slab drainage (technical choices, CAD, follow-up on site).</span></p>
           <a class="btn small outline" href="assets/docs/Rapport_stage_BUT3_NGE_Les_Maritimes.pdf" target="_blank" rel="noopener"><span class="fr">Rapport de stage (PDF, données financières floutées)</span><span class="en">Internship report (PDF, financial data blurred)</span></a>
+          <button class="photobtn" type="button" data-open-gallery="maritimes">📷 <span class="fr">Voir les photos (<span class="n"></span>)</span><span class="en">See photos (<span class="n"></span>)</span></button>
         </li>
         <li>
           <div class="when"><span class="fr">Avr. - mai 2024 - Nantes (Pays de la loire 44)</span><span class="en">Apr - May 2024 - Nantes (Pays de la loire 44)</span></div>
           <h3><span class="fr">Assistant conducteur de travaux - « Synopsys »</span><span class="en">Assistant site manager - “Synopsys”</span></h3>
           <p><span class="fr">Cinéma, clinique et logements R+7 en hyper centre-ville. Planning hebdomadaire, quantitatifs gros œuvre, contrôle des ferraillages avant coulage.</span><span class="en">Cinema, clinic and eight-storey housing in the city centre. Weekly planning, structural quantities, reinforcement checks before pours.</span></p>
+          <button class="photobtn" type="button" data-open-gallery="synopsys">📷 <span class="fr">Voir les photos (<span class="n"></span>)</span><span class="en">See photos (<span class="n"></span>)</span></button>
         </li>
         <li>
           <div class="when"><span class="fr">Mai - juin 2023 - Nantes (Pays de la loire 44)</span><span class="en">May - Jun 2023 - Nantes (Pays de la loire 44)</span></div>
           <h3><span class="fr">Ouvrier gros œuvre - futur CHU de l'Île de Nantes</span><span class="en">Structural works labourer - new Nantes hospital</span></h3>
           <p><span class="fr">Ferraillage, coffrage, bétonnage</span><span class="en">Rebar, formwork, concreting</span></p>
+          <button class="photobtn" type="button" data-open-gallery="chu">📷 <span class="fr">Voir les photos (<span class="n"></span>)</span><span class="en">See photos (<span class="n"></span>)</span></button>
         </li>
       </ol>
       <div>
-        <figure class="figure" style="margin-bottom:12px">
-          <img src="assets/plan_reseaux_detail.jpg" alt="Extrait du plan de réseaux sous dallage dessiné pendant le stage" loading="lazy">
-          <figcaption><span class="fr">Extrait de mon plan de réseaux sous dallage (EU/EP, pentes, fils d'eau, massifs)</span><span class="en">Excerpt of my under-slab drainage drawing (falls, invert levels, footings)</span></figcaption>
-        </figure>
-        <div class="gallery">
-          <img src="assets/chantier/vue_grue.jpg" alt="Vue depuis la grue" loading="lazy">
-          <img src="assets/chantier/ferraillage_dalle.jpg" alt="Ferraillage de dalle" loading="lazy">
-          <img src="assets/chantier/etaiement.jpg" alt="Étaiement" loading="lazy">
-          <img src="assets/chantier/dalle_coulee.jpg" alt="Dalle coulée" loading="lazy">
+        <div class="gtabs" role="group" aria-label="Choisir le chantier">
+          <button type="button" data-g="maritimes" aria-pressed="true">Les Maritimes 2025</button>
+          <button type="button" data-g="synopsys" aria-pressed="false">Synopsys 2024</button>
+          <button type="button" data-g="chu" aria-pressed="false"><span class="fr">CHU Nantes 2023</span><span class="en">Nantes hospital 2023</span></button>
         </div>
-        <p class="note" style="margin-top:8px"><span class="fr">Photos personnelles, chantier Synopsys, 2024.</span><span class="en">Personal photos, Synopsys site, 2024.</span></p>
+        <div class="carousel" id="carousel">
+          <div class="track"></div>
+          <button class="nav prev" type="button" aria-label="Photo précédente">&#8249;</button>
+          <button class="nav next" type="button" aria-label="Photo suivante">&#8250;</button>
+          <span class="count"></span>
+          <span class="zoom"><span class="fr">Cliquer pour agrandir</span><span class="en">Click to enlarge</span></span>
+        </div>
+        <p class="gcap" id="gcap"></p>
+        <div class="dots" id="gdots"></div>
+        <p class="note" style="margin-top:8px"><span class="fr">Photos personnelles prises pendant mes stages.</span><span class="en">Personal photos taken during my internships.</span></p>
       </div>
     </div>
   </div>
@@ -317,5 +325,17 @@
 
 <footer><div class="wrap">© 2026 Yanis Noel · <a href="https://github.com/yanisnoel">github.com/yanisnoel</a></div></footer>
 <script src="assets/site.js"></script>
+<dialog class="lb" id="lightbox" aria-label="Photos de chantier">
+  <div class="stage">
+    <button class="close" type="button" aria-label="Fermer">×</button>
+    <button class="lprev" type="button" aria-label="Précédente">&#8249;</button>
+    <img src="" alt="">
+    <p class="cap"></p>
+    <button class="lnext" type="button" aria-label="Suivante">&#8250;</button>
+  </div>
+</dialog>
+<script type="application/json" id="galerie-data">{"maritimes": [{"src": "assets/plan_reseaux_detail.jpg", "thumb": "assets/plan_reseaux_detail.jpg", "fr": "Extrait de mon plan de réseaux sous dallage (EU/EP, pentes, fils d'eau, massifs)", "en": "Excerpt of my under-slab drainage drawing (falls, invert levels, footings)"}, {"src": "assets/chantier/maritimes/01.jpg", "thumb": "assets/chantier/maritimes/01_s.jpg", "fr": "Conception des réseaux sous dallage : esquisses puis DAO sous AutoCAD", "en": "Designing the under-slab drainage: sketches, then CAD in AutoCAD"}, {"src": "assets/chantier/maritimes/02.jpg", "thumb": "assets/chantier/maritimes/02_s.jpg", "fr": "Préparation de chantier : plans d'installation annotés", "en": "Site preparation: annotated site layout plans"}, {"src": "assets/chantier/maritimes/03.jpg", "thumb": "assets/chantier/maritimes/03_s.jpg", "fr": "Grue montée et accès chantier sécurisé, mai 2025", "en": "Crane erected and secured site access, May 2025"}, {"src": "assets/chantier/maritimes/04.jpg", "thumb": "assets/chantier/maritimes/04_s.jpg", "fr": "Terrassements et approvisionnement des armatures", "en": "Earthworks and rebar delivery"}, {"src": "assets/chantier/maritimes/05.jpg", "thumb": "assets/chantier/maritimes/05_s.jpg", "fr": "Massif de fondation ferraillé en fond de fouille", "en": "Reinforced foundation pad in the excavation"}, {"src": "assets/chantier/maritimes/06.jpg", "thumb": "assets/chantier/maritimes/06_s.jpg", "fr": "Cage d'armatures d'une fosse avant coffrage", "en": "Reinforcement cage of a pit before formwork"}, {"src": "assets/chantier/maritimes/07.jpg", "thumb": "assets/chantier/maritimes/07_s.jpg", "fr": "Coffrage et ferraillage des longrines", "en": "Formwork and reinforcement of ground beams"}, {"src": "assets/chantier/maritimes/08.jpg", "thumb": "assets/chantier/maritimes/08_s.jpg", "fr": "Mise en place des banches", "en": "Setting up wall formwork"}, {"src": "assets/chantier/maritimes/09.jpg", "thumb": "assets/chantier/maritimes/09_s.jpg", "fr": "Premier voile banché décoffré", "en": "First cast-in-place wall, formwork removed"}], "synopsys": [{"src": "assets/chantier/synopsys/01.jpg", "thumb": "assets/chantier/synopsys/01_s.jpg", "fr": "Vue depuis la grue sur le centre de Nantes", "en": "View from the crane over central Nantes"}, {"src": "assets/chantier/synopsys/02.jpg", "thumb": "assets/chantier/synopsys/02_s.jpg", "fr": "Chantier en site urbain contraint, entre bâtiments existants", "en": "Tight urban site between existing buildings"}, {"src": "assets/chantier/synopsys/03.jpg", "thumb": "assets/chantier/synopsys/03_s.jpg", "fr": "Ferraillage d'un voile avant coulage", "en": "Wall reinforcement before pouring"}, {"src": "assets/chantier/synopsys/04.jpg", "thumb": "assets/chantier/synopsys/04_s.jpg", "fr": "Voile armé avec isolant, contrôle avant fermeture des banches", "en": "Reinforced wall with insulation, checked before closing the forms"}, {"src": "assets/chantier/synopsys/05.jpg", "thumb": "assets/chantier/synopsys/05_s.jpg", "fr": "Ferraillage de dalle", "en": "Slab reinforcement"}, {"src": "assets/chantier/synopsys/06.jpg", "thumb": "assets/chantier/synopsys/06_s.jpg", "fr": "Étaiement sous dalle", "en": "Slab propping"}, {"src": "assets/chantier/synopsys/07.jpg", "thumb": "assets/chantier/synopsys/07_s.jpg", "fr": "Suivi sur plan : avancement annoté à la main", "en": "Tracking progress on annotated drawings"}, {"src": "assets/chantier/synopsys/08.jpg", "thumb": "assets/chantier/synopsys/08_s.jpg", "fr": "Avancement du gros œuvre, mai 2024", "en": "Structural works progress, May 2024"}, {"src": "assets/chantier/synopsys/09.jpg", "thumb": "assets/chantier/synopsys/09_s.jpg", "fr": "Dalle ferraillée prête à couler", "en": "Reinforced slab ready for pouring"}], "chu": [{"src": "assets/chantier/chu/01.jpg", "thumb": "assets/chantier/chu/01_s.jpg", "fr": "Ferraillage d'un élément coulé sur site", "en": "Reinforcing a cast-in-place element"}, {"src": "assets/chantier/chu/02.jpg", "thumb": "assets/chantier/chu/02_s.jpg", "fr": "Pose des armatures", "en": "Placing the rebar"}, {"src": "assets/chantier/chu/03.jpg", "thumb": "assets/chantier/chu/03_s.jpg", "fr": "Bétonnage à la benne", "en": "Pouring concrete with the crane skip"}, {"src": "assets/chantier/chu/04.jpg", "thumb": "assets/chantier/chu/04_s.jpg", "fr": "Élément bétonné et taloché", "en": "Concreted and floated element"}, {"src": "assets/chantier/chu/05.jpg", "thumb": "assets/chantier/chu/05_s.jpg", "fr": "Banches de grande hauteur", "en": "Tall wall forms"}, {"src": "assets/chantier/chu/06.jpg", "thumb": "assets/chantier/chu/06_s.jpg", "fr": "Implantation au niveau laser", "en": "Setting out with a laser level"}, {"src": "assets/chantier/chu/07.jpg", "thumb": "assets/chantier/chu/07_s.jpg", "fr": "Mise en place d'éléments de coffrage", "en": "Installing formwork elements"}, {"src": "assets/chantier/chu/08.jpg", "thumb": "assets/chantier/chu/08_s.jpg", "fr": "Levage à la grue", "en": "Crane lifting"}, {"src": "assets/chantier/chu/09.jpg", "thumb": "assets/chantier/chu/09_s.jpg", "fr": "Voiles décoffrés et échafaudage de façade", "en": "Stripped walls and façade scaffolding"}]}</script>
+<script src="assets/galerie.js"></script>
+
 </body>
 </html>
