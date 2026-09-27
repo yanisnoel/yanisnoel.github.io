@@ -9,7 +9,7 @@
     chu: { fr: 'CHU de Nantes 2023', en: 'Nantes hospital 2023' }
   };
   function lang() { return document.body.getAttribute('data-lang') === 'en' ? 'en' : 'fr'; }
-  function track(n) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: n, title: n, event: true }); } catch (e) {} }
+  function track(n) { try { var c = sessionStorage.getItem('camp'); if (c) n += '--' + c; if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: n, title: n, event: true }); } catch (e) {} }
 
   // ---------- carrousel ----------
   var car = document.getElementById('carousel');
