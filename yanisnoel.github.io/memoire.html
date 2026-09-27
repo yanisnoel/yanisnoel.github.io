@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mémoire M1 — Microclimats et confort à La Réunion</title>
+<title>Mémoire M1 - Microclimats et confort à La Réunion</title>
 <meta name="description" content="Étude de cas : performance énergétique et confort thermique d'un logement RTAA DOM sous cinq microclimats réunionnais — 485 simulations EnergyPlus, chaîne Python, quatre régimes physiques. Yanis Noel, 2026.">
 <meta property="og:title" content="Un même logement, cinq microclimats — mémoire M1 de Yanis Noel">
 <meta property="og:image" content="https://yanisnoel.github.io/assets/memoire/synthese_confort.png">
@@ -22,7 +22,6 @@
     <div class="links">
       <a href="memoire.html" aria-current="page" data-keeplang><span class="fr">Mémoire M1</span><span class="en">M1 thesis</span></a>
       <a href="projets.html" data-keeplang><span class="fr">Projets</span><span class="en">Projects</span></a>
-      <a href="index.html#terrain" data-keeplang><span class="fr">Chantier</span><span class="en">Site work</span></a>
       <a href="index.html#contact" data-keeplang>Contact</a>
     </div>
     <div class="lang" role="group" aria-label="Langue / Language">
@@ -42,9 +41,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="kicker"><span class="fr">Mémoire de recherche · Master 1 Génie Civil · 2026</span><span class="en">Research thesis · MSc Civil Engineering year 1 · 2026</span></span>
+    <span class="kicker"><span class="fr">Mémoire de recherche - Master 1 Génie Civil - 2026</span><span class="en">Research thesis - MSc Civil Engineering year 1 - 2026</span></span>
     <h1 style="font-size:clamp(28px,4.6vw,46px);max-width:900px"><span class="fr">Performance énergétique et confort thermique des bâtiments neufs en climat tropical : les microclimats de La Réunion</span><span class="en">Energy performance and thermal comfort of new buildings in a tropical climate: the microclimates of La Réunion</span></h1>
-    <p class="role" style="margin-top:14px"><span class="fr">Encadrant : Dr Dimitri Bigot · Université de La Réunion, Département Génie Civil (campus du Tampon) · mars – juin 2026 · 65 pages + annexes.</span><span class="en">Supervisor: Dr Dimitri Bigot · University of La Réunion, Civil Engineering Department (Le Tampon) · March – June 2026 · 65 pages + appendices.</span></p>
+    <p class="role" style="margin-top:14px"><span class="fr">Encadrant : Dr Dimitri Bigot - Université de La Réunion  <br> Mars - Juin 2026 - 65 pages + annexes <br> En autonomie </span><span class="en">Supervisor: Dr Dimitri Bigot - University of La Réunion <br> March - June 2026 - 65 pages + appendices</span></p>
     <div class="cta">
       <a class="btn primary" href="assets/docs/Memoire_M1_Yanis_Noel_2026.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg><span class="fr">Mémoire complet (PDF)</span><span class="en">Full thesis (PDF, French)</span></a>
       <a class="btn ghost" href="assets/docs/Presentation_Memoire_M1.pdf" target="_blank" rel="noopener"><span class="fr">Présentation en 5 pages</span><span class="en">5-page summary (French)</span></a>
@@ -65,17 +64,19 @@
 
 <section id="contexte">
   <div class="wrap">
-    <div class="eyebrow"><span class="fr">1 · Contexte</span><span class="en">1 · Context</span></div>
+    <div class="eyebrow"><span class="fr">1 - Contexte</span><span class="en">1 - Context</span></div>
     <h2><span class="fr">Une réglementation plus grossière que le climat</span><span class="en">A regulation coarser than the climate</span></h2>
     <div class="grid2">
       <div>
-        <p><span class="fr">La Réunion doit produire environ <b>172 500 logements d'ici 2050</b> sur 2 512 km² de relief allant jusqu'à 3 071 m, avec des écarts de pluviométrie d'un facteur trois entre stations. La RTAA DOM 2016, qui fixe les exigences thermiques et d'aération des logements neufs, ne distingue que <b>trois tranches d'altitude</b>.</span><span class="en">La Réunion needs about <b>172,500 new dwellings by 2050</b> on 2,512 km² of terrain rising to 3,071 m, with threefold rainfall differences between stations. The RTAA DOM 2016 regulation, which sets thermal and ventilation requirements for new housing, only distinguishes <b>three altitude bands</b>.</span></p>
+        <p><span class="fr">La Réunion doit produire environ <b>172 500 logements d'ici 2050 *(2021)</b> sur 2 512 km² de relief allant jusqu'à 3 071 m, avec des écarts de pluviométrie d'un facteur trois entre stations.</span><span class="en">La Réunion needs about <b>172,500 new dwellings by 2050</b> on 2,512 km² of terrain rising to 3,071 m, with threefold rainfall differences between stations.</span></p>
+        <p><span class="fr">La RTAA DOM 2016, qui fixe les exigences thermiques et d'aération des logements neufs, ne distingue que <b>trois tranches d'altitude</b>.</span><span class="en"> The RTAA DOM 2016 regulation, which sets thermal and ventilation requirements for new housing, only distinguishes <b>three altitude bands</b>.
         <p><span class="fr">Davidson et al. (2023) proposent un zonage climatique en <b>3 clusters et 12 sous-zones</b> (Hauts, façade Est au vent, façade Ouest sous le vent). La question du mémoire :</span><span class="en">Davidson et al. (2023) propose a climate zoning of <b>3 clusters and 12 sub-zones</b> (uplands, windward east, leeward west). The thesis question:</span></p>
         <div class="callout"><b><span class="fr">Un même bâtiment conforme, soumis à différents microclimats, présente-t-il les mêmes performances — et le zonage microclimatique peut-il orienter des stratégies passives différenciées ?</span><span class="en">Does the same code-compliant building perform the same under different microclimates — and can microclimatic zoning guide differentiated passive strategies?</span></b></div>
       </div>
       <div class="grid2" style="gap:10px">
-        <figure class="figure"><img src="assets/memoire/rtaa_zones.png" alt="Zonage RTAA DOM" loading="lazy"><figcaption><span class="fr">RTAA DOM 2016 : 3 tranches d'altitude.</span><span class="en">RTAA DOM 2016: 3 altitude bands.</span></figcaption></figure>
-        <figure class="figure"><img src="assets/memoire/davidson_12_souszones.png" alt="12 sous-zones Davidson" loading="lazy"><figcaption><span class="fr">Davidson et al. 2023 : 12 sous-zones (CC BY-NC-ND 4.0).</span><span class="en">Davidson et al. 2023: 12 sub-zones (CC BY-NC-ND 4.0).</span></figcaption></figure>
+        <figure class="figure"><img src="assets/memoire/rtaa_zones.png" alt="Zonage RTAA DOM" loading="lazy"><figcaption><span class="fr">RTAA DOM 2016 : 3 tranches d'altitude</span><span class="en">RTAA DOM 2016: 3 altitude bands</span></figcaption></figure>
+        <figure class="figure"><img src="assets/memoire/davidson_3_clusters.png" alt="3 Clusters Davidson" loading="lazy"><figcaption><span class="fr">Davidson et al. 2023 : 3 Clusters</span><span class="en">Davidson et al. 2023: 12 sub-zones </span></figcaption></figure>
+        <figure class="figure"><img src="assets/memoire/davidson_12_souszones.png" alt="12 sous-zones Davidson" loading="lazy"><figcaption><span class="fr">Davidson et al. 2023 : 12 sous-zones </span><span class="en">Davidson et al. 2023: 12 sub-zones </span></figcaption></figure>
       </div>
     </div>
   </div>
