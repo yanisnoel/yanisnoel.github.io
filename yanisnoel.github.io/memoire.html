@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mémoire M1 — Microclimats et confort à La Réunion</title>
+<meta name="description" content="Étude de cas : performance énergétique et confort thermique d'un logement RTAA DOM sous cinq microclimats réunionnais — 485 simulations EnergyPlus, chaîne Python, quatre régimes physiques. Yanis Noel, 2026.">
+<meta property="og:title" content="Un même logement, cinq microclimats — mémoire M1 de Yanis Noel">
+<meta property="og:image" content="https://yanisnoel.github.io/assets/memoire/synthese_confort.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23143b3d'/><text x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23e3a33a' text-anchor='middle'>YN</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>window.goatcounter={path:function(p){try{var c=new URLSearchParams(location.search).get('c')||sessionStorage.getItem('camp')||'';c=c.toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,40);return location.pathname+(c?'?c='+c:'')}catch(e){return p}}};</script>
+<script data-goatcounter="https://yanisnoel.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body data-lang="fr">
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" data-keeplang>Yanis Noel</a>
+    <div class="links">
+      <a href="memoire.html" aria-current="page" data-keeplang><span class="fr">Mémoire M1</span><span class="en">M1 thesis</span></a>
+      <a href="projets.html" data-keeplang><span class="fr">Projets</span><span class="en">Projects</span></a>
+      <a href="index.html#terrain" data-keeplang><span class="fr">Chantier</span><span class="en">Site work</span></a>
+      <a href="index.html#contact" data-keeplang>Contact</a>
+    </div>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" data-set="fr" aria-pressed="true">FR</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+    <button class="navcta" type="button" data-open-contact><span class="fr">Me contacter</span><span class="en">Contact me</span></button>
+  </div>
+  <div class="mnav">
+    <a href="#contexte"><span class="fr">Contexte</span><span class="en">Context</span></a>
+    <a href="#methode"><span class="fr">Méthode</span><span class="en">Method</span></a>
+    <a href="#resultats"><span class="fr">Résultats</span><span class="en">Results</span></a>
+    <a href="#regimes"><span class="fr">Régimes</span><span class="en">Regimes</span></a>
+    <a href="#limites"><span class="fr">Limites</span><span class="en">Limits</span></a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker"><span class="fr">Mémoire de recherche · Master 1 Génie Civil · 2026</span><span class="en">Research thesis · MSc Civil Engineering year 1 · 2026</span></span>
+    <h1 style="font-size:clamp(28px,4.6vw,46px);max-width:900px"><span class="fr">Performance énergétique et confort thermique des bâtiments neufs en climat tropical : les microclimats de La Réunion</span><span class="en">Energy performance and thermal comfort of new buildings in a tropical climate: the microclimates of La Réunion</span></h1>
+    <p class="role" style="margin-top:14px"><span class="fr">Encadrant : Dr Dimitri Bigot · Université de La Réunion, Département Génie Civil (campus du Tampon) · mars – juin 2026 · 65 pages + annexes.</span><span class="en">Supervisor: Dr Dimitri Bigot · University of La Réunion, Civil Engineering Department (Le Tampon) · March – June 2026 · 65 pages + appendices.</span></p>
+    <div class="cta">
+      <a class="btn primary" href="assets/docs/Memoire_M1_Yanis_Noel_2026.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg><span class="fr">Mémoire complet (PDF)</span><span class="en">Full thesis (PDF, French)</span></a>
+      <a class="btn ghost" href="assets/docs/Presentation_Memoire_M1.pdf" target="_blank" rel="noopener"><span class="fr">Présentation en 5 pages</span><span class="en">5-page summary (French)</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="band">
+  <div class="wrap">
+    <div class="n"><b>485</b><span class="fr">simulations EnergyPlus</span><span class="en">EnergyPlus runs</span></div>
+    <div class="n"><b>0 → 46,7 %</b><span class="fr">confort adaptatif selon la station</span><span class="en">adaptive comfort by station</span></div>
+    <div class="n"><b>1 422 → 751</b><span class="fr">°C·h de surchauffe au Port</span><span class="en">°C·h overheating at Le Port</span></div>
+    <div class="n"><b>1,48 → 0,41</b><span class="fr">pic de risque moisissure, Plaine des Cafres</span><span class="en">peak mould risk, Plaine des Cafres</span></div>
+  </div>
+</div>
+
+<main>
+
+<section id="contexte">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fr">1 · Contexte</span><span class="en">1 · Context</span></div>
+    <h2><span class="fr">Une réglementation plus grossière que le climat</span><span class="en">A regulation coarser than the climate</span></h2>
+    <div class="grid2">
+      <div>
+        <p><span class="fr">La Réunion doit produire environ <b>172 500 logements d'ici 2050</b> sur 2 512 km² de relief allant jusqu'à 3 071 m, avec des écarts de pluviométrie d'un facteur trois entre stations. La RTAA DOM 2016, qui fixe les exigences thermiques et d'aération des logements neufs, ne distingue que <b>trois tranches d'altitude</b>.</span><span class="en">La Réunion needs about <b>172,500 new dwellings by 2050</b> on 2,512 km² of terrain rising to 3,071 m, with threefold rainfall differences between stations. The RTAA DOM 2016 regulation, which sets thermal and ventilation requirements for new housing, only distinguishes <b>three altitude bands</b>.</span></p>
+        <p><span class="fr">Davidson et al. (2023) proposent un zonage climatique en <b>3 clusters et 12 sous-zones</b> (Hauts, façade Est au vent, façade Ouest sous le vent). La question du mémoire :</span><span class="en">Davidson et al. (2023) propose a climate zoning of <b>3 clusters and 12 sub-zones</b> (uplands, windward east, leeward west). The thesis question:</span></p>
+        <div class="callout"><b><span class="fr">Un même bâtiment conforme, soumis à différents microclimats, présente-t-il les mêmes performances — et le zonage microclimatique peut-il orienter des stratégies passives différenciées ?</span><span class="en">Does the same code-compliant building perform the same under different microclimates — and can microclimatic zoning guide differentiated passive strategies?</span></b></div>
+      </div>
+      <div class="grid2" style="gap:10px">
+        <figure class="figure"><img src="assets/memoire/rtaa_zones.png" alt="Zonage RTAA DOM" loading="lazy"><figcaption><span class="fr">RTAA DOM 2016 : 3 tranches d'altitude.</span><span class="en">RTAA DOM 2016: 3 altitude bands.</span></figcaption></figure>
+        <figure class="figure"><img src="assets/memoire/davidson_12_souszones.png" alt="12 sous-zones Davidson" loading="lazy"><figcaption><span class="fr">Davidson et al. 2023 : 12 sous-zones (CC BY-NC-ND 4.0).</span><span class="en">Davidson et al. 2023: 12 sub-zones (CC BY-NC-ND 4.0).</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="methode">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fr">2 · Méthode</span><span class="en">2 · Method</span></div>
+    <h2><span class="fr">Une chaîne reproductible, du relevé météo au verdict</span><span class="en">A reproducible pipeline, from weather records to verdict</span></h2>
+    <p class="lede"><span class="fr">Tout est automatisé en Python pour que les 485 simulations soient comparables et relançables : un même modèle, seules la météo et le levier testé changent.</span><span class="en">Everything is automated in Python so the 485 runs are comparable and re-runnable: one model, only the weather and the tested measure change.</span></p>
+
+    <div class="pipe" style="margin-bottom:28px">
+      <div class="step"><b><span class="fr">Données Météo-France</span><span class="en">Météo-France data</span></b><span class="fr">CSV horaires 2010–2026, 89 stations classées selon leur complétude</span><span class="en">Hourly CSV 2010–2026, 89 stations ranked by completeness</span></div>
+      <div class="arr">→</div>
+      <div class="step"><b><span class="fr">Conversion EPW</span><span class="en">EPW conversion</span></b><span class="fr">Scripts d'extraction et de conversion avec contrôles</span><span class="en">Extraction and conversion scripts with checks</span></div>
+      <div class="arr">→</div>
+      <div class="step"><b><span class="fr">Atlas climatique</span><span class="en">Climate atlas</span></b><span class="fr">Psychrométrie, vent, rayonnement par station (Climate Consultant)</span><span class="en">Psychrometrics, wind, radiation per station (Climate Consultant)</span></div>
+      <div class="arr">→</div>
+      <div class="step"><b>EnergyPlus 26.1</b><span class="fr">Modèle de base + « patchs » Python par levier ou combinaison</span><span class="en">Baseline model + Python “patches” per measure or combination</span></div>
+      <div class="arr">→</div>
+      <div class="step"><b><span class="fr">Post-traitement</span><span class="en">Post-processing</span></b><span class="fr">Indicateurs, figures, tableaux de verdict par cluster</span><span class="en">Indicators, figures, verdict tables per cluster</span></div>
+    </div>
+
+    <div class="grid2">
+      <figure class="figure"><img src="assets/memoire/carte_stations.png" alt="Carte des 89 stations Météo-France et des 5 stations retenues" loading="lazy"><figcaption><span class="fr">89 stations Météo-France classées selon leur exploitabilité (6 complètes, 15 partielles, 68 insuffisantes) ; les 5 stations retenues couvrent les 3 clusters.</span><span class="en">89 Météo-France stations ranked by usability (6 complete, 15 partial, 68 insufficient); the 5 selected stations cover all 3 clusters.</span></figcaption></figure>
+      <div>
+        <h3><span class="fr">Le bâtiment de référence</span><span class="en">The reference building</span></h3>
+        <p class="muted"><span class="fr">Maison individuelle T4 de plain-pied, 77,88 m², plan en L (9,6 × 11,1 m), issue d'un catalogue commercial : pas un projet d'excellence, mais la typologie courante, conforme au minimum RTAA DOM. Modélisée en 7 zones thermiques.</span><span class="en">Single-storey three-bedroom house, 77.88 m², L-shaped (9.6 × 11.1 m), taken from a commercial catalogue: not a showcase project but the common typology, built to RTAA DOM minimums. Modelled as 7 thermal zones.</span></p>
+        <figure class="figure" style="max-width:340px"><img src="assets/memoire/plan_t4.png" alt="Plan du T4 de référence" loading="lazy"></figure>
+        <h3 style="margin-top:18px"><span class="fr">Stations</span><span class="en">Stations</span></h3>
+        <p class="muted"><span class="fr">Plaine des Cafres (Hauts, C1-C), Colimaçons (Hauts, C1-A), Saint-Benoît (Est, C2), Le Port (Ouest sec, C3-B), Gillot (Nord-Est littoral, C3-C).</span><span class="en">Plaine des Cafres (uplands, C1-C), Colimaçons (uplands, C1-A), Saint-Benoît (east, C2), Le Port (dry west, C3-B), Gillot (north-east coast, C3-C).</span></p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px"><span class="fr">Démarche en deux phases</span><span class="en">Two-phase approach</span></h3>
+    <div class="grid3" style="margin-top:12px">
+      <div class="card"><b><span class="fr">Phase 1 — Diagnostic</span><span class="en">Phase 1 — Diagnosis</span></b><p class="muted" style="margin-top:6px"><span class="fr">Le même T4 sur les 5 stations, sous deux scénarios d'occupation (actif, télétravail/retraite).</span><span class="en">The same house at 5 stations, under two occupancy scenarios (working, home-based).</span></p></div>
+      <div class="card"><b><span class="fr">Phase 2a — Leviers unitaires</span><span class="en">Phase 2a — Single measures</span></b><p class="muted" style="margin-top:6px"><span class="fr">Protection solaire, cool roof, ventilation renforcée, inertie, ossature bois + ouate, ventilation d'hygiène, isolation toiture, plancher, murs (+ brasseur d'air en post-traitement).</span><span class="en">Solar shading, cool roof, increased ventilation, thermal mass, timber frame + cellulose, hygiene ventilation, roof, floor and wall insulation (+ ceiling fan in post-processing).</span></p></div>
+      <div class="card"><b><span class="fr">Phase 2b — Combinaisons & robustesse</span><span class="en">Phase 2b — Combinations & robustness</span></b><p class="muted" style="margin-top:6px"><span class="fr">Combinaisons ciblées par cluster, contrôle négatif, analyse de sensibilité OAT, test d'orientation.</span><span class="en">Cluster-targeted combinations, negative control, one-at-a-time sensitivity analysis, orientation test.</span></p></div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:24px">
+    <table class="data">
+      <tr><th><span class="fr">Indicateur</span><span class="en">Indicator</span></th><th><span class="fr">Ce qu'il mesure</span><span class="en">What it measures</span></th></tr>
+      <tr><td><b>TOC</b></td><td><span class="fr">Taux d'occupation en confort, modèle adaptatif tropical (Toe et al. 2013)</span><span class="en">Share of occupied hours in comfort, tropical adaptive model (Toe et al. 2013)</span></td></tr>
+      <tr><td><b>DH28</b></td><td><span class="fr">Degrés-heures au-dessus de 28 °C — repère méthodologique RE2020 : 1 250 °C·h</span><span class="en">Degree-hours above 28 °C — RE2020 benchmark: 1,250 °C·h</span></td></tr>
+      <tr><td><b>Mould Index</b></td><td><span class="fr">Risque de moisissure en triple lecture : M<sub>int</sub>, M<sub>bio</sub>, heures humides (Ojanen et al. 2010)</span><span class="en">Mould risk read three ways: M<sub>int</sub>, M<sub>bio</sub>, humid hours (Ojanen et al. 2010)</span></td></tr>
+      <tr><td><b>%h HR&gt;80</b></td><td><span class="fr">Part des heures à humidité relative supérieure à 80 %</span><span class="en">Share of hours above 80 % relative humidity</span></td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="resultats">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fr">3 · Résultats du diagnostic</span><span class="en">3 · Diagnosis results</span></div>
+    <h2><span class="fr">À prescriptions identiques, trois pathologies différentes</span><span class="en">Same requirements, three different pathologies</span></h2>
+    <p class="lede"><span class="fr">Aux Hauts, déficit thermique et humidité (52 % des heures au-dessus de 80 % d'HR à la Plaine des Cafres). Au Port, surchauffe sèche : 1 422 °C·h, au-dessus du repère RE2020. À Saint-Benoît, chaleur modérée et humidité persistante. Gillot reste partiellement protégé par les alizés.</span><span class="en">In the uplands, heat deficit and humidity (52 % of hours above 80 % RH at Plaine des Cafres). At Le Port, dry overheating: 1,422 °C·h, above the RE2020 benchmark. At Saint-Benoît, moderate heat with persistent humidity. Gillot stays partly protected by trade winds.</span></p>
+    <div class="grid2">
+      <figure class="figure"><img src="assets/memoire/dh28.png" alt="DH28 par station" loading="lazy"><figcaption><span class="fr">Degrés-heures &gt; 28 °C, scénarios actif et télétravail ; ligne rouge : repère RE2020.</span><span class="en">Degree-hours &gt; 28 °C, working and home-based scenarios; red line: RE2020 benchmark.</span></figcaption></figure>
+      <figure class="figure"><img src="assets/memoire/risque_moisissure.png" alt="Risque de moisissure par station" loading="lazy"><figcaption><span class="fr">Heures à HR &gt; 80 % et pic de risque de moisissure, baseline.</span><span class="en">Hours above 80 % RH and peak mould risk, baseline.</span></figcaption></figure>
+      <figure class="figure"><img src="assets/memoire/jourtype_plaine.png" alt="Jour type Plaine des Cafres" loading="lazy"><figcaption><span class="fr">Jour type à la Plaine des Cafres : températures sous 20 °C la majeure partie du temps.</span><span class="en">Typical day at Plaine des Cafres: temperatures below 20 °C most of the time.</span></figcaption></figure>
+      <figure class="figure"><img src="assets/memoire/jourtype_leport.png" alt="Jour type Le Port" loading="lazy"><figcaption><span class="fr">Jour type au Port : l'intérieur dépasse 28 °C en été austral.</span><span class="en">Typical day at Le Port: indoor temperature exceeds 28 °C in austral summer.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="regimes">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fr">4 · Leviers passifs</span><span class="en">4 · Passive measures</span></div>
+    <h2><span class="fr">Le même levier peut aider ici et nuire là-bas</span><span class="en">The same measure can help here and harm there</span></h2>
+    <p class="lede"><span class="fr">L'isolation du plancher (XPS 100 mm) est le meilleur levier hygrothermique dans les Hauts — et le pire levier thermique au Port, où elle ajoute 3 041 °C·h de surchauffe. D'où quatre « régimes de correction », discriminés par l'écart d'humidité absolue intérieur–extérieur.</span><span class="en">Floor insulation (100 mm XPS) is the best hygrothermal measure in the uplands — and the worst thermal one at Le Port, where it adds 3,041 °C·h of overheating. Hence four “correction regimes”, discriminated by the indoor–outdoor absolute humidity difference.</span></p>
+    <div class="tablewrap">
+    <table class="data">
+      <tr><th><span class="fr">Régime</span><span class="en">Regime</span></th><th><span class="fr">Où</span><span class="en">Where</span></th><th><span class="fr">Mécanisme</span><span class="en">Mechanism</span></th><th><span class="fr">Résultat</span><span class="en">Result</span></th></tr>
+      <tr><td><b><span class="fr">Évacuation directe</span><span class="en">Direct removal</span></b></td><td>C3 · Le Port / Gillot</td><td><span class="fr">L'air extérieur sec évacue chaleur et humidité intérieures</span><span class="en">Dry outdoor air removes indoor heat and moisture</span></td><td><span class="fr">Combinaison ciblée : DH28 1 422 → <b>751 °C·h</b>, sous le repère RE2020</span><span class="en">Targeted combination: DH28 1,422 → <b>751 °C·h</b>, below the RE2020 benchmark</span></td></tr>
+      <tr><td><b><span class="fr">Fermer la fuite dominante</span><span class="en">Close the dominant leak</span></b></td><td>C1-C · Plaine des Cafres</td><td><span class="fr">Le sol est la source principale d'humidité et de froid</span><span class="en">The ground is the main source of moisture and cold</span></td><td><span class="fr">Isolation plancher + orientation Est : pic M<sub>int</sub> 1,48 → <b>0,41</b> (÷ 3,6)</span><span class="en">Floor insulation + east orientation: peak M<sub>int</sub> 1.48 → <b>0.41</b> (÷ 3.6)</span></td></tr>
+      <tr><td><b><span class="fr">Fermetures additives</span><span class="en">Additive closures</span></b></td><td>C1-A · Colimaçons</td><td><span class="fr">Plusieurs fuites : il faut fermer sol et murs</span><span class="en">Several leaks: floor and walls must both be closed</span></td><td><span class="fr">Plancher + ossature bois/ouate : gain cumulé <b>−1,13</b>, supérieur à la somme des effets seuls</span><span class="en">Floor + timber frame/cellulose: cumulative gain <b>−1.13</b>, more than the sum of single effects</span></td></tr>
+      <tr><td><b><span class="fr">Saturation passive</span><span class="en">Passive saturation</span></b></td><td>C2 · Saint-Benoît</td><td><span class="fr">Chaleur modérée + humidité persistante</span><span class="en">Moderate heat + persistent humidity</span></td><td><span class="fr">Aucune combinaison passive n'apporte de gain global : un module actif minimal est requis</span><span class="en">No passive combination gives an overall gain: a minimal active module is needed</span></td></tr>
+    </table>
+    </div>
+
+    <div class="grid2" style="margin-top:28px">
+      <figure class="figure"><img src="assets/memoire/orientation.png" alt="Effet de l'orientation" loading="lazy"><figcaption><span class="fr">L'orientation du séjour-cuisine, un levier à coût nul : l'optimum est à l'Est à la Plaine des Cafres, au Nord ou à l'Ouest au Port.</span><span class="en">Living-room orientation, a zero-cost measure: optimal facing east at Plaine des Cafres, north or west at Le Port.</span></figcaption></figure>
+      <figure class="figure"><img src="assets/memoire/sensibilite_oat.png" alt="Sensibilité OAT" loading="lazy"><figcaption><span class="fr">Analyse de sensibilité OAT (infiltrations, apports internes, conductivité de l'isolant, métabolisme) : les verdicts restent stables dans l'enveloppe testée.</span><span class="en">One-at-a-time sensitivity (infiltration, internal gains, insulation conductivity, metabolic rate): verdicts stay stable within the tested range.</span></figcaption></figure>
+    </div>
+
+    <h3 style="margin-top:32px"><span class="fr">Ce que j'en retiens comme ingénieur</span><span class="en">What I take away as an engineer</span></h3>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card">
+        <b><span class="fr">Une matrice de recommandations en 4 couches</span><span class="en">A four-layer recommendation matrix</span></b>
+        <ul class="clean muted" style="margin-top:8px">
+          <li><span class="fr"><b>Implantation</b> : séjour à l'Est (90° ± 30°) dans les Hauts, Nord ou Ouest au Port.</span><span class="en"><b>Siting</b>: living room facing east (90° ± 30°) in the uplands, north or west at Le Port.</span></li>
+          <li><span class="fr"><b>Enveloppe</b> : isolation sous dalle dans les Hauts (+ murs à Colimaçons), combinaison anti-surchauffe à l'Ouest, rien de lourd à l'Est.</span><span class="en"><b>Envelope</b>: under-slab insulation in the uplands (+ walls at Colimaçons), anti-overheating combination in the west, nothing heavy in the east.</span></li>
+          <li><span class="fr"><b>Ventilation</b> : standard RTAA, ventilation d'hygiène renforcée à Saint-Benoît.</span><span class="en"><b>Ventilation</b>: RTAA standard, stronger hygiene ventilation at Saint-Benoît.</span></li>
+          <li><span class="fr"><b>Actif</b> : seulement pour le cluster Est (VMC hygroréglable ou déshumidification ciblée).</span><span class="en"><b>Active</b>: only for the east cluster (humidity-controlled ventilation or targeted dehumidification).</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <b><span class="fr">Des frictions avec les référentiels actuels</span><span class="en">Friction with current guidelines</span></b>
+        <ul class="clean muted" style="margin-top:8px">
+          <li><span class="fr">Aucune exigence sur le plancher dans la RTAA DOM : c'est le défaut le plus pénalisant en altitude. Piste : R<sub>sol</sub> ≥ 2,5 m²·K/W au-dessus de 800 m.</span><span class="en">No floor requirement in the RTAA DOM: the most penalising gap at altitude. Proposal: R<sub>floor</sub> ≥ 2.5 m²·K/W above 800 m.</span></li>
+          <li><span class="fr">Ventiler davantage peut aggraver le risque hygrothermique dans les Hauts quand l'air intérieur reste froid (non-monotonie de la ventilation).</span><span class="en">More ventilation can worsen hygrothermal risk in the uplands when indoor air stays cold (non-monotonic ventilation).</span></li>
+          <li><span class="fr">En paroi ventilée humide, le comportement hygroscopique de l'isolant compte plus que sa résistance thermique.</span><span class="en">In a humid ventilated wall, the insulation's hygroscopic behaviour matters more than its thermal resistance.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ctaband" style="margin-top:28px">
+      <h3><span class="fr">Ce type d'étude correspond à un projet chez vous ?</span><span class="en">Does this kind of study match a project of yours?</span></h3>
+      <div class="cta" style="margin:0"><button class="btn primary" type="button" data-open-contact style="border:0;cursor:pointer"><span class="fr">Me contacter</span><span class="en">Contact me</span></button><a class="btn outline" href="tel:+33757506778" data-track="clic-telephone">07 57 50 67 78</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="limites">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fr">5 · Limites et suites</span><span class="en">5 · Limits and next steps</span></div>
+    <h2><span class="fr">Une esquisse fondatrice, pas une réponse fermée</span><span class="en">A foundation, not a closed answer</span></h2>
+    <div class="grid2">
+      <div class="card">
+        <b><span class="fr">Limites assumées</span><span class="en">Acknowledged limits</span></b>
+        <ul class="clean muted" style="margin-top:8px">
+          <li><span class="fr">Modèle adaptatif extrapolé pour les stations fraîches d'altitude : lecture comparative, pas absolue.</span><span class="en">Adaptive model extrapolated to cool upland stations: comparative, not absolute, reading.</span></li>
+          <li><span class="fr">Mould Index comparatif : ne remplace pas un modèle hygrothermique couplé (WUFI, Delphin).</span><span class="en">Comparative Mould Index: not a substitute for coupled heat-air-moisture modelling (WUFI, Delphin).</span></li>
+          <li><span class="fr">OAT ne capte pas les interactions (→ méthode de Morris).</span><span class="en">OAT misses interactions (→ Morris method).</span></li>
+          <li><span class="fr">Une seule géométrie (T4 en L) ; pas de chiffrage des surcoûts.</span><span class="en">Single geometry (L-shaped house); no cost analysis.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <b><span class="fr">Ce que je veux poursuivre en stage</span><span class="en">What I want to continue in an internship</span></b>
+        <ul class="clean muted" style="margin-top:8px">
+          <li><span class="fr">Couplage hygrothermique et matériaux biosourcés en climat humide.</span><span class="en">Hygrothermal coupling and bio-based materials in humid climates.</span></li>
+          <li><span class="fr">Extension aux 12 sous-zones et aux fichiers météo 2050.</span><span class="en">Extension to all 12 sub-zones and 2050 weather files.</span></li>
+          <li><span class="fr">Passage à l'existant : rénovation différenciée du parc de logements.</span><span class="en">Existing stock: microclimate-specific housing retrofit.</span></li>
+          <li><span class="fr">Chiffrage coût / efficacité pour la maîtrise d'ouvrage sociale.</span><span class="en">Cost-effectiveness for social housing clients.</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="note" style="margin-top:20px"><span class="fr">La chaîne de simulation Python est mon travail personnel et n'est pas publiée ; je peux la présenter en entretien. Figures issues du mémoire ; carte des sous-zones : Davidson et al. (2023), licence CC BY-NC-ND 4.0.</span><span class="en">The Python simulation pipeline is my own work and is not published; I can walk through it in an interview. Figures from the thesis; sub-zone map: Davidson et al. (2023), CC BY-NC-ND 4.0 licence.</span></p>
+    <div class="cta">
+      <a class="btn outline" href="assets/docs/Memoire_M1_Yanis_Noel_2026.pdf" target="_blank" rel="noopener"><span class="fr">Mémoire complet (PDF)</span><span class="en">Full thesis (PDF)</span></a>
+      <a class="btn outline" href="projets.html" data-keeplang><span class="fr">Voir les autres projets</span><span class="en">See other projects</span> →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2><span class="fr">Un sujet proche dans votre structure ?</span><span class="en">A related topic in your organisation?</span></h2>
+    <p class="lede"><span class="fr">Stage de fin d'études disponible du 1<sup>er</sup> mars au 1<sup>er</sup> septembre 2027.</span><span class="en">End-of-studies internship available 1 March – 1 September 2027.</span></p>
+    <div class="cta" style="margin-top:0">
+      <a class="btn primary" href="tel:+33757506778" data-track="clic-telephone">📞 07 57 50 67 78</a>
+      <a class="btn primary" href="mailto:yanis.noel.etu@gmail.com" data-track="clic-email">✉️ yanis.noel.etu@gmail.com</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/yanis-noel-b70205252/" target="_blank" rel="noopener" data-track="clic-linkedin">LinkedIn</a>
+      <button class="btn ghost" type="button" data-open-contact style="background:none;cursor:pointer"><span class="fr">Proposer un rendez-vous</span><span class="en">Suggest a meeting</span></button>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<dialog class="contact" id="contact-dlg" aria-labelledby="dlg-title">
+  <div class="dh">
+    <button class="x" type="button" aria-label="Fermer">×</button>
+    <h2 id="dlg-title"><span class="fr">Me contacter</span><span class="en">Get in touch</span></h2>
+    <p><span class="fr">Stage de fin d'études · disponible du 1<sup>er</sup> mars au 1<sup>er</sup> septembre 2027. Je réponds sous 24 h.</span><span class="en">End-of-studies internship · available 1 March – 1 September 2027. I reply within 24 h.</span></p>
+  </div>
+  <div class="db">
+    <a class="crow" href="tel:+33757506778" data-track="clic-telephone"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span class="t"><small><span class="fr">Téléphone</span><span class="en">Phone</span></small><b>07 57 50 67 78</b></span></a>
+    <div class="crow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><a class="t" href="mailto:yanis.noel.etu@gmail.com" data-track="clic-email" style="text-decoration:none;color:inherit"><small>Email</small><b>yanis.noel.etu@gmail.com</b></a><button type="button" data-copy="yanis.noel.etu@gmail.com"><span class="fr">Copier</span><span class="en">Copy</span></button></div>
+    <a class="crow" href="https://www.linkedin.com/in/yanis-noel-b70205252/" target="_blank" rel="noopener" data-track="clic-linkedin"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg></span><span class="t"><small>LinkedIn</small><b>yanis-noel</b></span></a>
+    <a class="crow" href="assets/docs/CV_Yanis_NOEL.pdf" target="_blank" rel="noopener" data-track="clic-cv"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg></span><span class="t"><small>CV</small><b><span class="fr">Télécharger (PDF)</span><span class="en">Download (PDF, French)</span></b></span></a>
+    <a class="rdv fr" href="mailto:yanis.noel.etu@gmail.com?subject=Proposition%20d%27%C3%A9change%20%E2%80%93%20stage%20de%20fin%20d%27%C3%A9tudes%202027&body=Bonjour%20Yanis%2C%0A%0AJe%20vous%20propose%20un%20%C3%A9change%20%28t%C3%A9l%C3%A9phone%20ou%20visio%29%20le%20%E2%80%A6%20%C3%A0%20%E2%80%A6%20au%20sujet%20de%20%E2%80%A6%0A%0ACordialement%2C%0A" data-track="clic-rdv">Proposer un rendez-vous</a>
+    <a class="rdv en" href="mailto:yanis.noel.etu@gmail.com?subject=Call%20proposal%20%E2%80%93%202027%20end-of-studies%20internship&body=Hello%20Yanis%2C%0A%0AI%20would%20like%20to%20schedule%20a%20call%20%28phone%20or%20video%29%20on%20%E2%80%A6%20at%20%E2%80%A6%20about%20%E2%80%A6%0A%0ABest%20regards%2C%0A" data-track="clic-rdv">Suggest a meeting</a>
+  </div>
+</dialog>
+
+<footer><div class="wrap">© 2026 Yanis Noel · <a href="index.html" data-keeplang><span class="fr">Accueil</span><span class="en">Home</span></a></div></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
