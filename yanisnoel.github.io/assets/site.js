@@ -22,7 +22,7 @@
 
   // ---------- suivi de campagne (GoatCounter, sans cookies) ----------
   // ?c=ademe dans le lien envoyé -> mémorisé pour la visite, ajouté aux événements
-  var camp = (params.get('c') || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 40);
+  var camp = (params.get('c') || params.get('ref') || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 40);
   try {
     if (camp) sessionStorage.setItem('camp', camp); else camp = sessionStorage.getItem('camp') || '';
   } catch (e) {}
