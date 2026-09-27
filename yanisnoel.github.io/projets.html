@@ -264,23 +264,7 @@
 
 <footer><div class="wrap">© 2026 Yanis Noel - <a href="index.html" data-keeplang><span class="fr">Accueil</span><span class="en">Home</span></a> - <a href="mailto:yanis.noel.etu@gmail.com">yanis.noel.etu@gmail.com</a></div></footer>
 
-<style>
-.pcard .foot a.btn{flex:1 1 100%;justify-content:center;padding:12px 16px;font-size:15px;font-weight:700;background:var(--amber);color:#143b3d;border:0;border-radius:10px;box-shadow:0 2px 0 rgba(0,0,0,.15);transition:transform .15s,background .15s}
-.pcard .foot a.btn:hover{background:#f0b54d;transform:translateY(-2px)}
-.pcard .thumb{position:relative;cursor:pointer}
-.pcard .thumb img{transition:transform .3s}
-.pcard:hover .thumb img{transform:scale(1.04)}
-.pcard .thumb::after{content:"PDF";position:absolute;top:10px;right:10px;background:rgba(20,59,61,.85);color:#fff;font:700 11px Inter,sans-serif;padding:4px 8px;border-radius:6px}
-</style>
-<script>
-document.querySelectorAll('.pcard').forEach(function(c){
-  var a=c.querySelector('.foot a.btn[href$=".pdf"]'); if(!a) return;
-  var p=(a.textContent.match(/\d+\s*p/)||[''])[0].replace(/\s/g,' ');
-  a.innerHTML='📄 <span class="fr">Lire le rapport</span><span class="en">Read the report</span>'+(p?' - '+p+'.':'');
-  a.setAttribute('data-track','pdf-'+a.getAttribute('href').split('/').pop().replace('.pdf','').slice(0,30));
-  var t=c.querySelector('.thumb'); if(t) t.addEventListener('click',function(){a.click();});
-});
-</script>
+<script src="assets/projets-detail.js"></script>
 
 <script src="assets/site.js"></script>
 </body>
