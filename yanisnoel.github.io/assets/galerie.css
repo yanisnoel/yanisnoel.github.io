@@ -1,0 +1,36 @@
+/* ===== Galerie chantier : carrousel + visionneuse ===== */
+.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.gtabs button{font:600 13px Inter,sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 12px;border-radius:999px;cursor:pointer}
+.gtabs button[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+.carousel{position:relative;background:#0c1a1b;border-radius:14px;overflow:hidden}
+.carousel .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.carousel .track::-webkit-scrollbar{display:none}
+.carousel .slide{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:4/3;display:grid;place-items:center;background:#0c1a1b;cursor:zoom-in;border:0;padding:0}
+.carousel .slide img{width:100%;height:100%;object-fit:contain}
+.carousel .nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#143b3d;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.carousel .nav:hover{background:#e3a33a}
+.carousel .prev{left:10px}.carousel .next{right:10px}
+.carousel .count{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font:600 12px Inter,sans-serif;padding:4px 9px;border-radius:999px}
+.carousel .zoom{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font:600 12px Inter,sans-serif;padding:5px 10px;border-radius:999px;pointer-events:none}
+.gcap{font-size:14px;color:var(--muted);margin:10px 2px 0;min-height:2.6em}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);padding:0;cursor:pointer}
+.dots button[aria-current="true"]{background:var(--rust);width:20px;border-radius:4px}
+
+.photobtn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:4px 0;margin-top:6px;color:var(--rust);font:600 14px Inter,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.photobtn:hover{color:var(--ink)}
+
+/* visionneuse plein écran */
+dialog.lb{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100vw;height:100vh;margin:0}
+dialog.lb::backdrop{background:rgba(5,12,13,.93)}
+.lb .stage{background:rgba(5,12,13,.96);position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 16px 20px;box-sizing:border-box}
+.lb img{max-width:100%;max-height:calc(100vh - 150px);object-fit:contain;border-radius:8px;user-select:none}
+.lb .cap{color:#e7eeec;font:15px/1.5 Inter,sans-serif;text-align:center;max-width:760px;margin-top:12px}
+.lb .cap small{display:block;color:#9db3b1;font-size:13px;margin-top:2px}
+.lb button{position:absolute;border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:50%;width:46px;height:46px;font-size:26px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lb button:hover{background:#e3a33a;color:#143b3d}
+.lb .close{top:10px;right:12px}
+.lb .lprev{left:12px;top:50%;transform:translateY(-50%)}
+.lb .lnext{right:12px;top:50%;transform:translateY(-50%)}
+@media(max-width:600px){.lb .lprev,.lb .lnext{top:auto;bottom:14px;transform:none}}
